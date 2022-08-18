@@ -1,7 +1,9 @@
 // Setting up the date on top //
 var a= dayjs().format('dddd MMMM D YYYY, h:mm');
   $("#display-date").text(a)
-  var row = ""
+
+
+
 
   var theDay = [
     {
@@ -76,7 +78,7 @@ theDay.forEach(function(theHour) {
     var hourRow = $("<form>").attr({
         "class": "row"
     });
-    $(".contanier").append(hourRow);
+    $(".container").append(hourRow);
 
     var hourField = $("<div/>")
     .text(`${theHour.hour}${theHour.meridiem}`)
@@ -86,7 +88,7 @@ theDay.forEach(function(theHour) {
 
     var hourText = $("<div/>")
     .attr({
-        "class": "col-md-9"
+        "class": "col-md-9 description p-0"
     });
 
     var planData = $("<textarea>");
@@ -96,8 +98,27 @@ theDay.forEach(function(theHour) {
         planData.attr ({
             "class": "past", 
         })
+    } else if (theHour.time === dayjs().format("HH")) {
+        planData.attr({
+            "class": "present"
+        })
+    } else if (theHour.time > dayjs().format("HH")) {
+        planData.attr({
+            "class": "future"
+        })
     }
-    console.log(hourRow);
-    console.log(hourField);
+
+    var saveButton = $("<i class='far fa-save fa-lg'></i>")
+    var savePlan = $("<button>")
+        .attr({
+            "class": "col-md-1 saveBtn"
+    });
+    savePlan.append(saveButton);
+    hourRow.append(hourField, hourText, savePlan);
+console.log(hourRow);
+console.log(hourText);
+console.log(hourField);
+console.log(planData);
 })
+
 
