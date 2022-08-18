@@ -1,5 +1,5 @@
 // Setting up the date on top //
-var a= dayjs().format('dddd MMMM D YYYY, h:mm');
+var a= dayjs().advancedFormat('dddd MMMM Do YYYY, h:mm');
   $("#display-date").text(a)
 
 
@@ -115,10 +115,41 @@ theDay.forEach(function(theHour) {
     });
     savePlan.append(saveButton);
     hourRow.append(hourField, hourText, savePlan);
-console.log(hourRow);
-console.log(hourText);
-console.log(hourField);
-console.log(planData);
+// console.log(hourRow);
+// console.log(hourText);
+// console.log(hourField);
+// console.log(planData);
 })
 
 
+function saveReminder() {
+    localStorage.setItem("theDay", JSON.stringify(theDay));
+}
+
+function showReminder() {
+    theDay.forEach(function(_theHour) {
+        $(`#${theHour.id}`).val(theHour.reminder);
+    })
+}
+
+function init() {
+    var storedDay = JSON.parse(localStorage.getItem("theDay"));
+
+    if (storedDay) {
+        theDay = storedDay;
+    }
+
+    saveReminder();
+    showReminder();
+}
+
+init();
+
+$(".saveBtn").on("click", function(event) {
+    event.preventDefault();
+    var saveIndex = $(this).siblings(".description").children(".future").attr("id");
+    theDay[saveIndex].reminder = $(this).siblings(".description").children(".future").val();
+    console.log(saveIndex);
+    saveReminder();
+    showReminder();
+})
