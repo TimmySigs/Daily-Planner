@@ -46,4 +46,58 @@ var a= dayjs().format('dddd MMMM D YYYY, h:mm');
         meridiem: "pm",
         reminder: ""
     }, 
+    {
+        id: "6",
+        hour: "03",
+        time: "15",
+        meridiem: "pm",
+        reminder: ""
+    },
+    {
+        id: "7",
+        hour: "04",
+        time: "16",
+        meridiem: "pm",
+        reminder: ""
+    },
+    {
+        id: "8",
+        hour: "05",
+        time: "17",
+        meridiem: "pm",
+        reminder: ""
+    },
+    
 ]
+
+
+theDay.forEach(function(theHour) {
+
+    var hourRow = $("<form>").attr({
+        "class": "row"
+    });
+    $(".contanier").append(hourRow);
+
+    var hourField = $("<div/>")
+    .text(`${theHour.hour}${theHour.meridiem}`)
+    .attr({
+        "class": "col-md-2 hour"
+    });
+
+    var hourText = $("<div/>")
+    .attr({
+        "class": "col-md-9"
+    });
+
+    var planData = $("<textarea>");
+    hourText.append(planData);
+    planData.attr("id", theHour.id);
+    if (theHour.time < dayjs().format("HH")) {
+        planData.attr ({
+            "class": "past", 
+        })
+    }
+    console.log(hourRow);
+    console.log(hourField);
+})
+
