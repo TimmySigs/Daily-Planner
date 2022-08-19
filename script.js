@@ -145,9 +145,6 @@ function init() {
 
 init();
 
-// $(document).ready(function ()
-
-// )
 
 $(".saveBtn").on("click", function(event) {
     event.preventDefault();
