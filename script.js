@@ -1,5 +1,5 @@
 // Setting up the date on top //
-var a= dayjs().advancedFormat('dddd MMMM Do YYYY, h:mm');
+var a= dayjs().format('dddd MMMM Do YYYY, h:mm');
   $("#display-date").text(a)
 
 
@@ -128,7 +128,7 @@ function saveReminder() {
 
 function showReminder() {
     theDay.forEach(function(_theHour) {
-        $(`#${theHour.id}`).val(theHour.reminder);
+        $(`#${_theHour.id}`).val(_theHour.reminder);
     })
 }
 
@@ -145,11 +145,15 @@ function init() {
 
 init();
 
+$(document).ready(function ()
+
+)
+
 $(".saveBtn").on("click", function(event) {
     event.preventDefault();
     var saveIndex = $(this).siblings(".description").children(".future").attr("id");
     theDay[saveIndex].reminder = $(this).siblings(".description").children(".future").val();
-    console.log(saveIndex);
     saveReminder();
     showReminder();
+    
 })
